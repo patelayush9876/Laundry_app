@@ -13,7 +13,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 2. Start the app
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
 In the output, you'll find options to open the app in a
@@ -24,6 +24,22 @@ In the output, you'll find options to open the app in a
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Vendor Search Feature
+
+The app includes a search feature that allows customers to find laundry vendors based on their location or the services they offer. 
+
+### How to Use:
+- Enter a location (e.g., "Hyderabad") or a service (e.g., "wash") in the search input field.
+- Click the "Search" button to filter the list of vendors.
+- The app will display a list of vendors that match the search criteria, showing their names, locations, and available services.
+
+### Sample Vendor Data:
+- Vendor A: Hyderabad - Services: wash, dry-cleaning
+- Vendor B: Bangalore - Services: wash & fold, ironing
+- Vendor C: Chennai - Services: wash, wash & ironing
+- Vendor D: Mumbai - Services: dry-cleaning, ironing
+- Vendor E: Delhi - Services: wash, wash & fold
 
 ## Get a fresh project
 

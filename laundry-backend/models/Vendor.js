@@ -6,6 +6,7 @@ const Vendor = sequelize.define("Vendor", {
   latitude: { type: DataTypes.FLOAT, allowNull: false },
   longitude: { type: DataTypes.FLOAT, allowNull: false },
   location_name: { type: DataTypes.STRING, allowNull: false },
+  services:{type:DataTypes.STRING,allowNull:false},
 });
 
 module.exports = Vendor;

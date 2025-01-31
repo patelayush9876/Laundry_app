@@ -27,6 +27,7 @@ router.get("/vendors/location", async (req, res) => {
   const { location_name } = req.query;
 
   const vendors = await Vendor.findAll({ where: { location_name } });
+  console.log(vendors);
   res.json(vendors);
 });
 

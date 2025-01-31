@@ -16,17 +16,15 @@ export default function Index() {
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [isloading, setisloading] = useState(true);
 
-
   useEffect(() => {
     // Fetch vendors from the backend API
     const fetchVendors = async () => {
       try {
-        const response = await axios.get("192.168.29.89:5000/api/vendors/location?location_name=Hyderabad", {
-          params: { location_name: 'Hyderabad' } // Example location
+        const response = await axios.get("http://192.168.29.89:5000/api/vendors/location", {
+          params: { location_name:['Hyderabad', 'Delhi', 'Bengaluru', 'Mumbai', 'Noida'] } // Example location_name
         });
-        // setisloading(false);
         setVendors(response.data);
-        setFilteredVendors(response.data);
+        // setFilteredVendors(response.data);
       } catch (error) {
         console.error('Error fetching vendors:', error);
       }
@@ -40,8 +38,10 @@ export default function Index() {
 
   const handleSearch = () => {
     const filtered = vendors.filter(vendor =>
-      vendor.location_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      vendor.services.some(service => service.toLowerCase().includes(searchTerm.toLowerCase()))
+      vendor.location_name.toLowerCase().includes(searchTerm.toLowerCase()) ||  
+      (vendor.services && vendor.services.some(service => service.toLowerCase().includes(searchTerm.toLowerCase()))),
+      console.log(vendors)
+      
     );
     setFilteredVendors(filtered);
   };
@@ -68,7 +68,9 @@ export default function Index() {
           renderItem={({ item }) => (
             <View style={{ marginVertical: 10 }}>
               <Text>{item.name} - {item.location_name}</Text>
-              <Text>Services: {item.services.join(', ')}</Text>
+              <Text>Services: {Array.isArray(item.services) && item.services.length > 0 ? item.services.join(', ') : 'No services available'}</Text>
+
+              {/* <Text>Services: {JSON.stringify(item.services)? item.services.join(', ') : 'No services available'}</Text> */}
             </View>
           )}
         />

@@ -1,8 +1,8 @@
-import { Text, View, SafeAreaView, TextInput, Button, FlatList, ActivityIndicator } from "react-native";
+import { Text, View, SafeAreaView, TextInput, TouchableOpacity, FlatList, ActivityIndicator, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as Location from "expo-location";
-import Toast from "react-native-toast-message"; // Import toast
+import Toast from "react-native-toast-message";
 
 interface Vendor {
   id: number;
@@ -56,7 +56,7 @@ export default function Index() {
     Toast.show({
       type: "info",
       text1: message,
-      position:"bottom",
+      position: "bottom",
       visibilityTime: 3000,
     });
   };
@@ -125,49 +125,49 @@ export default function Index() {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#F2B28C" />
         <Text>Loading...</Text>
       </View>
     );
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, padding: 20 }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center" }}>LaundrySolutions</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Laundry Solutions</Text>
 
       <TextInput
         placeholder="Search by city or service"
         value={searchTerm}
         onChangeText={setSearchTerm}
-        style={{
-          borderWidth: 1,
-          padding: 10,
-          marginBottom: 10,
-          borderRadius: 5,
-          backgroundColor: "#f0f0f0",
-        }}
+        style={styles.input}
       />
 
-      <Button title="Search" onPress={handleSearch} disabled={searchLoading} />
+      <TouchableOpacity style={styles.button} onPress={handleSearch} disabled={searchLoading}>
+        <Text style={styles.buttonText}>{searchLoading ? "Searching..." : "Search"}</Text>
+      </TouchableOpacity>
 
       {!isCitySearch && userLocation && (
-        <Button
-          title="Find Nearby Vendors"
+        <TouchableOpacity
+          style={[styles.button, styles.nearbyButton]}
           onPress={() => fetchNearbyVendors(userLocation.latitude, userLocation.longitude)}
           disabled={nearbyLoading}
-        />
+        >
+          <Text style={styles.buttonText}>{nearbyLoading ? "Fetching..." : "Find Nearby Vendors"}</Text>
+        </TouchableOpacity>
       )}
 
       <FlatList
         data={filteredVendors}
         keyExtractor={(item, index) => `${item.id}-${item.location_name}-${index}`}
         renderItem={({ item }) => (
-          <View style={{ marginVertical: 10, padding: 10, borderWidth: 1, borderRadius: 5 }}>
-            <Text style={{ fontWeight: "bold" }}>
+          <View style={styles.vendorCard}>
+            <Text style={styles.vendorName}>
               {item.name} - {item.location_name}
             </Text>
-            <Text>Services: {item.services.length > 0 ? item.services.join(", ") : "No services available"}</Text>
+            <Text style={styles.vendorServices}>
+              Services: {item.services.length > 0 ? item.services.join(", ") : "No services available"}
+            </Text>
           </View>
         )}
       />
@@ -177,3 +177,64 @@ export default function Index() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#F6DED8",
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#F2B28C",
+  },
+  input: {
+    borderWidth: 1,
+    padding: 12,
+    borderRadius: 10,
+    backgroundColor: "#FFFFFF",
+    borderColor: "#F2B28C",
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: "#F2B28C",
+    padding: 12,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  nearbyButton: {
+    backgroundColor: "#F6DED8",
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  vendorCard: {
+    backgroundColor: "#F6DED8",
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 10,
+    borderColor: "#F2B28C",
+    borderWidth: 1,
+  },
+  vendorName: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#F2B28C",
+  },
+  vendorServices: {
+    fontSize: 14,
+    color: "#6B6B6B",
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+

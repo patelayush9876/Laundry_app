@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   nearbyButton: {
-    backgroundColor: "#F6DED8",
+    backgroundColor: "#48A6A7",
   },
   buttonText: {
     color: "#FFFFFF",

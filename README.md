@@ -1,4 +1,4 @@
-# Welcome to your Expo app 👋
+# Welcome to the Laundry app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
@@ -40,6 +40,17 @@ The app includes a search feature that allows customers to find laundry vendors 
 - Vendor C: Chennai - Services: wash, wash & ironing
 - Vendor D: Mumbai - Services: dry-cleaning, ironing
 - Vendor E: Delhi - Services: wash, wash & fold
+
+# My Android App
+
+## Screenshots
+
+### Home Screen
+![Home Screen](Screenshots/IMG1.jpg)
+
+### Search Feature
+![Search Feature](Screenshots/collage.jpg)
+
 
 ## Get a fresh project
 

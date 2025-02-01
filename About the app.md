@@ -1,3 +1,13 @@
+# My Android App
+
+## Screenshots
+
+### Home Screen
+![Home Screen](Screenshots/IMG1.jpg)
+
+### Search Feature
+![Search Feature](Screenshots/collage.jpg)
+
 # Laundry Vendor Finder App  
 
 This is a **React Native Android application** with a **Node.js + MySQL backend** that connects customers with laundry vendors based on location and services.  
